@@ -1,132 +1,125 @@
-# 📚 Student Tracker
+# 📚 Student Academic Goal & Progress Tracker
 
-**A self-hosted academic dashboard built with Flask & MySQL.**
+## Overview of the Project
+Let’s be real: keeping track of grades, study hours, and deadlines usually involves a mess of sticky notes or a chaotic Excel sheet. I built **Student Tracker** to fix that.
 
-Let’s be real: keeping track of grades, study hours, and deadlines usually involves a mess of sticky notes or a chaotic Excel sheet. I built **Student Tracker** to fix that. It’s a dedicated web app to manage your academic life, visualize your progress, and maybe even make studying a little less painful with some gamification.
+This is a dedicated, self-hosted web application designed to manage your academic life. It helps you set goals, visualize your progress with auto-generated charts, and even gamifies the process to keep you motivated. No heavy frontend frameworks here—just solid Python, clean HTML/CSS, and data visualization that actually works.
 
-No heavy frontend frameworks here—just solid Python, clean HTML/CSS, and data visualization that works.
+---
 
------
+## Features
+It’s not just a simple to-do list. Here is what the application handles:
 
-## 🧐 What can it do?
+* **Goal Management:** Set target scores and deadlines. The app tracks your status (Pending → In Progress → Completed) automatically based on your logs.
+* **Dashboard Analytics:** I used **Matplotlib** to generate dynamic charts. You get visual feedback on your weekly progress and subject performance right on the dashboard.
+* **Subject Tracking:** Keep a log of every subject you are studying and record your marks to see averages over time.
+* **Gamification System:** Earn badges (like "Week Warrior" or "Consistency King") for maintaining login streaks and hitting your goals.
+* **Study Timer:** A built-in Pomodoro timer (standard 25-min sessions) to help you focus without leaving the app.
+* **Reports & Exports:** You can download your weekly progress as CSV files or export your entire data history as a ZIP file.
+* **Secure Authentication:** Full registration and login system with hashed passwords, so your data stays private.
 
-It’s not just a to-do list. Here are the main tools included:
+---
 
-  * **Goal Management:** Set target scores for your subjects and track them. The app auto-updates the status (Pending → In Progress → Completed) based on your inputs.
-  * **Analytics Dashboard:** I used **Matplotlib** to auto-generate charts. You get immediate visual feedback on your weekly progress, subject performance, and goal completion.
-  * **Study Timer (Pomodoro):** A built-in focus timer. You can do standard 25-minute sprints or customize it.
-  * **Gamification:** You earn badges (like "Week Warrior" or "Consistency King") for maintaining streaks and hitting goals. It helps keep the motivation up.
-  * **Reports & Exports:** Need to back up your data? You can export your logs to CSV or download a full ZIP archive of your semester performance.
-  * **Privacy:** It includes a full registration/login system. Your data is isolated to your account.
+## Technologies & Tools Used
+I kept the stack modular and lightweight to make it easy to deploy and modify.
 
------
+* **Backend:** Python 3.8+ (Flask 2.3.3)
+* **Database:** MySQL 8.0+
+* **Frontend:** HTML5, CSS3 (Custom design, no external frameworks)
+* **Visualization:** Matplotlib 3.7.2 (Server-side chart rendering)
+* **Database Connector:** `mysql-connector-python`
 
-## 🛠 Under the Hood
+---
 
-The stack is kept simple and modular. Great for learning how full-stack apps fit together.
+## Steps to Install & Run the Project
 
-  * **Backend:** Python 3.8+ (Flask 2.3.3)
-  * **Database:** MySQL 8.0+
-  * **Frontend:** HTML5, CSS3 (Custom styling, no Bootstrap/Tailwind dependency)
-  * **Visualization:** Matplotlib (Server-side rendering)
-  * **ORM/Connector:** `mysql-connector-python`
+Follow these steps to get the app running on your local machine.
 
------
+### 1. Prerequisites
+Ensure you have Python and MySQL installed:
+```bash
+python --version  # Should be 3.8 or higher
+mysql --version   # Should be 8.0 or higher
+````
 
-## 🚀 Getting Started
+### 2\. Clone the Repository
 
-Follow these steps to get the app running locally.
-
-### 1\. Prerequisites
-
-You need Python and MySQL installed.
+Download the project files and navigate into the folder:
 
 ```bash
-python --version  # Should be 3.8+
-mysql --version   # Should be 8.0+
+git clone <your-repo-url>
+cd student_tracker
 ```
 
-### 2\. Clone and Install
+### 3\. Install Dependencies
 
-Grab the repo and install the Python packages.
+Install the required Python packages:
 
 ```bash
-git clone [your-repo-link-here]
-cd student_tracker
 pip install -r requirements.txt
 ```
 
-### 3\. Database Setup
+### 4\. Database Setup
 
-This is the most critical part. Make sure your MySQL server is running.
-
-1.  Log into MySQL: `mysql -u root -p`
-2.  Create the database using the provided schema:
+1.  Log in to your MySQL server:
+    ```bash
+    mysql -u root -p
+    ```
+2.  Create the database using the provided schema file:
     ```sql
     SOURCE database/schema.sql;
     ```
-3.  **Important:** Open `app.py` (lines 17-22) and update the `DB_CONFIG` dictionary with your actual MySQL password.
+3.  **Critical Step:** Open `app.py` (lines 17-22) and update the `DB_CONFIG` dictionary with your actual MySQL password:
+    ```python
+    DB_CONFIG = {
+        'host': 'localhost',
+        'user': 'root',
+        'password': 'YOUR_ACTUAL_PASSWORD',  # Update this!
+        'database': 'student_tracker_db'
+    }
+    ```
 
-<!-- end list -->
+### 5\. Create Required Folders
 
-```python
-DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'YOUR_ACTUAL_PASSWORD_HERE', # Don't forget this!
-    'database': 'student_tracker_db'
-}
-```
-
-### 4\. Create Static Folders
-
-Sometimes empty folders don't get pushed to Git. The app needs these to save the generated charts and exports, or it will crash.
+The app needs specific folders to save charts and exports. Create them if they don't exist:
 
 ```bash
 mkdir -p static/charts
 mkdir -p exports
 ```
 
-### 5\. Run it
+### 6\. Run the Application
 
 ```bash
 python app.py
 ```
 
-Head over to `http://localhost:5000`.
+You should see a message saying "Running on http://0.0.0.0:5000". Open that URL in your browser.
 
 -----
 
-## 📂 Project Layout
+## Instructions for Testing
 
-If you want to tweak the code, here is where everything lives:
+Once the app is running, follow this quick "sanity check" to ensure all modules are working correctly:
 
-  * `app.py`: The entry point. Handles routing and app config.
-  * `modules/`: I separated the logic here so `app.py` doesn't get huge.
-      * `auth.py`: Login/Register logic.
-      * `charts.py`: The Matplotlib code that generates the PNGs.
-      * `goals.py` & `subjects.py`: CRUD operations.
-  * `templates/`: Standard Jinja2 templates.
-  * `static/css/style.css`: All the custom styling is here.
+1.  **Test Registration:** Go to the Sign-Up page and create a new account. If successful, you should be redirected to the Dashboard.
+2.  **Add Data:**
+      * Navigate to **"Subjects"** and add a new subject (e.g., "Mathematics").
+      * Go to **"My Goals"** and create a goal for that subject (e.g., "Score 90% in Finals").
+3.  **Verify Charts:**
+      * Go to **"Subject Tracking"** and log a test score (e.g., 85).
+      * Return to the **Dashboard**. You should see a chart generated showing this data. (If the image is broken, check the `static/charts` folder permissions).
+4.  **Test Tools:**
+      * Open the **Study Timer** and start a 5-minute session to see if the countdown works.
+      * Go to **Reports** and click "Export Goals" to verify that a CSV file downloads.
 
 -----
 
-## 🐛 Common Issues (Troubleshooting)
+## Screenshots
 
-**"Access denied for user 'root'..."**
+*The main dashboard showing progress charts and upcoming deadlines.*
 
-  * 99% of the time, this means you didn't update the password in `app.py` or your MySQL server isn't running.
+*The goal management interface.*
 
-**"ModuleNotFoundError"**
-
-  * You skipped the `pip install` step. Run `pip install -r requirements.txt`.
-
-**Charts aren't showing up?**
-
-  * Check if the `static/charts` folder exists. The app needs write permissions there to save the images.
-
-**Port 5000 is busy?**
-
-  * If you have another Flask app running, change the last line in `app.py` to `app.run(port=5001)`.
-
---
+```
+```
