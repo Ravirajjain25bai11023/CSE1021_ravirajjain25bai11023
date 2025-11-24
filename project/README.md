@@ -37,6 +37,7 @@ project/
 ├── app.py                      # Main Flask application
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
+├── statement.md                # Project overview
 ├── database/
 │   └── schema.sql              # MySQL database schema
 ├── modules/
