@@ -155,16 +155,19 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 *The main dashboard showing progress.*
 <img width="1918" height="912" alt="Screenshot 2025-11-24 165744" src="https://github.com/user-attachments/assets/ec5e04b7-dc0f-49c3-826e-82067636ac00" />
 <img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
-
-<img width="1919" height="910" alt="Screenshot 2025-11-24 165730" src="https://github.com/user-attachments/assets/82e64516-a422-4cb6-ad05-8a379e5c1549" />
-<img width="1919" height="911" alt="Screenshot 2025-11-24 165701" src="https://github.com/user-attachments/assets/af94c936-6851-4a11-bc20-c39c697b25d4" />
-<img width="1919" height="910" alt="Screenshot 2025-11-24 165636" src="https://github.com/user-attachments/assets/149f7725-9b7f-447c-9c60-fb50bf1d70c8" />
-<img width="1919" height="907" alt="Screenshot 2025-11-24 165416" src="https://github.com/user-attachments/assets/18630de7-2949-4775-922a-351209d84ab5" />
-<img width="1919" height="911" alt="Screenshot 2025-11-24 165357" src="https://github.com/user-attachments/assets/5a61f09f-7ade-4c77-a966-18ee044d829c" />
-<img width="1919" height="911" alt="Screenshot 2025-11-24 165345" src="https://github.com/user-attachments/assets/c8156693-1e87-4e43-a54b-d75e3817831d" />
-<img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
-<img width="1919" height="909" alt="Screenshot 2025-11-24 165243" src="https://github.com/user-attachments/assets/f1dffe56-0bca-4ffe-8931-088bb1b6c0ec" />
 <img width="1914" height="969" alt="Screenshot 2025-11-24 165220" src="https://github.com/user-attachments/assets/bdcd0d7b-78ff-43fb-8640-f96e81af4013" />
+<img width="1919" height="909" alt="Screenshot 2025-11-24 165243" src="https://github.com/user-attachments/assets/f1dffe56-0bca-4ffe-8931-088bb1b6c0ec" />
+<img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
+<img width="1919" height="911" alt="Screenshot 2025-11-24 165345" src="https://github.com/user-attachments/assets/c8156693-1e87-4e43-a54b-d75e3817831d" />
+<img width="1919" height="911" alt="Screenshot 2025-11-24 165357" src="https://github.com/user-attachments/assets/5a61f09f-7ade-4c77-a966-18ee044d829c" />
+<img width="1919" height="907" alt="Screenshot 2025-11-24 165416" src="https://github.com/user-attachments/assets/18630de7-2949-4775-922a-351209d84ab5" />
+<img width="1919" height="910" alt="Screenshot 2025-11-24 165636" src="https://github.com/user-attachments/assets/149f7725-9b7f-447c-9c60-fb50bf1d70c8" />
+<img width="1919" height="911" alt="Screenshot 2025-11-24 165701" src="https://github.com/user-attachments/assets/af94c936-6851-4a11-bc20-c39c697b25d4" />
+<img width="1919" height="910" alt="Screenshot 2025-11-24 165730" src="https://github.com/user-attachments/assets/82e64516-a422-4cb6-ad05-8a379e5c1549" />
+
+
+
+
 
 
 *The goal management interface.*
