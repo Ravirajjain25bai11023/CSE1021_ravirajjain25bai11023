@@ -31,37 +31,39 @@ I kept the stack modular and lightweight to make it easy to deploy and modify.
 
 ---
 ## Project Structure
+
+```text
 student_tracker/
 ├── app.py                      # Main Flask application
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
 ├── database/
-│   └── schema.sql             # MySQL database schema
+│   └── schema.sql              # MySQL database schema
 ├── modules/
-│   ├── __init__.py            # Module initialization
-│   ├── auth.py                # Authentication manager
-│   ├── goals.py               # Goal management
-│   ├── subjects.py            # Subject tracking
-│   ├── reports.py             # Report generation
-│   ├── charts.py              # Chart generation (Matplotlib)
-│   └── exports.py             # Data export functions
+│   ├── __init__.py             # Module initialization
+│   ├── auth.py                 # Authentication manager
+│   ├── goals.py                # Goal management
+│   ├── subjects.py             # Subject tracking
+│   ├── reports.py              # Report generation
+│   ├── charts.py               # Chart generation (Matplotlib)
+│   └── exports.py              # Data export functions
 ├── static/
 │   ├── css/
-│   │   └── style.css          # Main stylesheet
-│   └── charts/                # Generated chart images
+│   │   └── style.css           # Main stylesheet
+│   └── charts/                 # Generated chart images
 ├── templates/
-│   ├── base.html              # Base template
-│   ├── login.html             # Login page
-│   ├── register.html          # Registration page
-│   ├── dashboard.html         # Dashboard
-│   ├── goals.html             # Goals management
-│   ├── subjects.html          # Subjects tracking
-│   ├── reports.html           # Reports page
-│   ├── badges.html            # Badges & achievements
-│   ├── profile.html           # User profile
-│   ├── study_timer.html       # Pomodoro timer
-│   └── todo.html              # To-do list
-└── exports/                   # Generated export files
+│   ├── base.html               # Base template
+│   ├── login.html              # Login page
+│   ├── register.html           # Registration page
+│   ├── dashboard.html          # Dashboard
+│   ├── goals.html              # Goals management
+│   ├── subjects.html           # Subjects tracking
+│   ├── reports.html            # Reports page
+│   ├── badges.html             # Badges & achievements
+│   ├── profile.html            # User profile
+│   ├── study_timer.html        # Pomodoro timer
+│   └── todo.html               # To-do list
+└── exports/                    # Generated export files
 
 ---
 
