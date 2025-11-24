@@ -157,11 +157,15 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 <img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
 
 *The goal management interface.*
+
 <img width="1914" height="969" alt="Screenshot 2025-11-24 165220" src="https://github.com/user-attachments/assets/bdcd0d7b-78ff-43fb-8640-f96e81af4013" />
 <img width="1919" height="909" alt="Screenshot 2025-11-24 165243" src="https://github.com/user-attachments/assets/f1dffe56-0bca-4ffe-8931-088bb1b6c0ec" />
 
-*The goal management interface.*
+*The subject management interface.*
+
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
+
+*The report management interface.*
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165345" src="https://github.com/user-attachments/assets/c8156693-1e87-4e43-a54b-d75e3817831d" />
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165357" src="https://github.com/user-attachments/assets/5a61f09f-7ade-4c77-a966-18ee044d829c" />
 <img width="1919" height="907" alt="Screenshot 2025-11-24 165416" src="https://github.com/user-attachments/assets/18630de7-2949-4775-922a-351209d84ab5" />
