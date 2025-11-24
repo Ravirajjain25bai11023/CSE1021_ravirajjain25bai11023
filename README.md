@@ -158,6 +158,14 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 
 <img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
 
+*The registration interface.*
+
+<img width="1918" height="967" alt="Screenshot 2025-11-24 165046" src="https://github.com/user-attachments/assets/fe0ce8f9-82b2-4a8f-be0e-7500104cbc4a" />
+
+*The login interface.*
+
+<img width="1919" height="969" alt="Screenshot 2025-11-24 165025" src="https://github.com/user-attachments/assets/067588f3-a155-42c9-b47c-aeb70aab621f" />
+
 *The goal management interface.*
 
 <img width="1914" height="969" alt="Screenshot 2025-11-24 165220" src="https://github.com/user-attachments/assets/bdcd0d7b-78ff-43fb-8640-f96e81af4013" />
@@ -167,6 +175,7 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 *The subject management interface.*
 
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
+
 
 *The report management interface.*
 
