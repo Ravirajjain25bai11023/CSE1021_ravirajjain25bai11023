@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Badges</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* quick badge styles */
+        .badge-box { 
+            border: 1px solid #eee; 
+            padding: 15px; 
+            border-radius: 5px; 
+            text-align: center; 
+            width: 160px; 
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .badge-icon { font-size: 2.5rem; margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Tracker</h2>
+                <p>User: {{ session.username }}</p>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="{{url_for('dashboard')}}">📊 Dashboard</a></li>
+                <li><a href="{{url_for('goals')}}">🎯 My Goals</a></li>
+                <li><a href="{{url_for('subjects')}}">📖 Subjects</a></li>
+                <li><a href="{{url_for('reports')}}">📈 Reports</a></li>
+                <li><a href="{{url_for('badges')}}" class="active">🏆 Badges</a></li>
+                <li><a href="{{url_for('study_timer')}}">⏱️ Timer</a></li>
+                <li><a href="{{url_for('todo')}}">✅ To-Do</a></li>
+                <li><a href="{{url_for('profile')}}">👤 Profile</a></li>
+                <li><a href="{{url_for('logout')}}">🚪 Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div style="margin-bottom: 20px;">
+                <h1>Achievements</h1>
+            </div>
+
+            <div class="content-card">
+                <h3>Unlocked</h3>
+                {% if earned %}
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                        {% for b in earned %}
+                        <div class="badge-box">
+                            <span class="badge-icon">🏆</span>
+                            <b>{{b.badge_name}}</b>
+                            <br>
+                            <small style="color: #888;">
+                                {{ b.earned_date.strftime('%Y-%m-%d') }}
+                            </small>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div style="padding: 30px; text-align: center; color: #777;">
+                        No badges yet. Keep going!
+                    </div>
+                {% endif %}
+            </div>
+
+            <div style="height: 20px;"></div> <div class="content-card">
+                <h3>All Badges</h3>
+                <div style="display: flex; flex-wrap: wrap; gap: 15px;">
+                    {% for b in available %}
+                    
+                    {# check if locked #}
+                    {% set locked = b.name not in earned|map(attribute='badge_name')|list %}
+                    
+                    <div class="badge-box" style="{{ 'opacity: 0.5; filter: grayscale(1);' if locked else '' }}">
+                        <span class="badge-icon">
+                            {% if b.type == 'streak' %}🔥
+                            {% elif b.type == 'achievement' %}⭐
+                            {% else %}🏅{% endif %}
+                        </span>
+                        <div style="font-weight: bold; margin-bottom: 5px; font-size: 14px;">{{ b.name }}</div>
+                        <div style="font-size: 11px; line-height: 1.4; color: #555;">{{ b.description }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
