@@ -1,129 +1,128 @@
 CREATE DATABASE IF NOT EXISTS student_tracker_db;
 USE student_tracker_db;
 
--- Users Table
+-- Users table
 CREATE TABLE users (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(100) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password_hash VARCHAR(255) NOT NULL,
-    created_at DATETIME NOT NULL,
-    last_login DATETIME NOT NULL,
-    study_streak INT DEFAULT 0,
-    INDEX idx_email (email),
-    INDEX idx_username (username)
-);
+    uid             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username        VARCHAR(50) NOT NULL,
+    email           VARCHAR(100) NOT NULL UNIQUE,
+    pwd_hash        VARCHAR(255) NOT NULL,
+    joined_at       DATETIME DEFAULT CURRENT_TIMESTAMP,
+    last_login      DATETIME,
+    streak          INT DEFAULT 0,
+    
+    UNIQUE KEY (username)
+) ENGINE=InnoDB;
 
--- Goals Table
-CREATE TABLE goals (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    subject VARCHAR(100) NOT NULL,
-    target_score DECIMAL(10, 2) NOT NULL,
-    current_progress INT DEFAULT 0,
-    status ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
-    deadline DATE NOT NULL,
-    description TEXT,
-    created_at DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    INDEX idx_status (status),
-    INDEX idx_deadline (deadline)
-);
-
--- Subjects Table
+-- Subjects (lookup table)
 CREATE TABLE subjects (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    subject_name VARCHAR(100) NOT NULL,
-    created_at DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    UNIQUE KEY unique_user_subject (user_id, subject_name)
-);
+    sid             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    name            VARCHAR(64) NOT NULL,
+    added_on        DATETIME DEFAULT CURRENT_TIMESTAMP,
+    
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    UNIQUE KEY uk_user_sub (uid, name)
+) ENGINE=InnoDB;
 
--- Progress Logs Table
+-- Core goals
+-- added check constraint to stop invalid percentages
+CREATE TABLE goals (
+    gid             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    subject         VARCHAR(100) NOT NULL,
+    target_score    DECIMAL(5,2) NOT NULL CHECK (target_score <= 100),
+    progress        INT UNSIGNED DEFAULT 0 CHECK (progress <= 100),
+    status          ENUM('Pending', 'In Progress', 'Completed') DEFAULT 'Pending',
+    due_date        DATE NOT NULL,
+    description     TEXT,
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    -- Composite index for the dashboard "upcoming" query
+    INDEX idx_dashboard (uid, status, due_date)
+) ENGINE=InnoDB;
+
+-- Tracking logs
+-- NOTE: Removed cascade delete here so we keep history even if goal is deleted
 CREATE TABLE progress_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    goal_id INT NULL,
-    subject_id INT NOT NULL,
-    marks_scored DECIMAL(10, 2) NOT NULL,
-    date_logged DATETIME NOT NULL,
-    notes TEXT,
-    FOREIGN KEY (goal_id) REFERENCES goals(id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
-    INDEX idx_goal_id (goal_id),
-    INDEX idx_subject_id (subject_id),
-    INDEX idx_date_logged (date_logged)
-);
+    log_id          BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    gid             INT UNSIGNED,
+    sid             INT UNSIGNED NOT NULL,
+    marks           DECIMAL(5,2),
+    logged_at       DATETIME DEFAULT CURRENT_TIMESTAMP,
+    notes           TEXT,
 
--- Study Sessions Table
+    FOREIGN KEY (gid) REFERENCES goals(gid) ON DELETE SET NULL,
+    FOREIGN KEY (sid) REFERENCES subjects(sid),
+    INDEX idx_recent (sid, logged_at) 
+) ENGINE=InnoDB;
+
+-- Timer sessions
 CREATE TABLE study_sessions (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    subject_id INT NOT NULL,
-    duration_minutes INT NOT NULL,
-    session_date DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (subject_id) REFERENCES subjects(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    INDEX idx_subject_id (subject_id),
-    INDEX idx_session_date (session_date)
-);
+    sess_id         BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    sid             INT UNSIGNED NOT NULL,
+    duration_mins   INT UNSIGNED NOT NULL CHECK (duration_mins > 0), 
+    sess_date       DATETIME NOT NULL,
 
--- Badges Table
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    FOREIGN KEY (sid) REFERENCES subjects(sid),
+    -- helps calc total study time per subject
+    INDEX idx_analytics (uid, sid, duration_mins)
+) ENGINE=InnoDB;
+
+-- Badge system
 CREATE TABLE badges (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    badge_name VARCHAR(100) NOT NULL,
-    badge_type ENUM('streak', 'achievement', 'special') NOT NULL,
-    earned_date DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    UNIQUE KEY unique_user_badge (user_id, badge_name)
-);
+    bid             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    badge_name      VARCHAR(100) NOT NULL,
+    type            ENUM('streak', 'achievement', 'special') NOT NULL,
+    earned_on       DATETIME DEFAULT CURRENT_TIMESTAMP,
 
--- Activity Logs Table
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    UNIQUE KEY uk_one_badge (uid, badge_name)
+) ENGINE=InnoDB;
+
+-- Audit trail / Activity
 CREATE TABLE activity_logs (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    activity_type VARCHAR(50) NOT NULL,
-    description TEXT NOT NULL,
-    timestamp DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    INDEX idx_timestamp (timestamp),
-    INDEX idx_activity_type (activity_type)
-);
+    id              BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    act_type        VARCHAR(32) NOT NULL,
+    details         TEXT,
+    ts              DATETIME DEFAULT CURRENT_TIMESTAMP,
 
--- Todo Tasks Table
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    INDEX idx_timeline (uid, ts DESC)
+) ENGINE=InnoDB;
+
+-- Simple Todo
 CREATE TABLE todo_tasks (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    user_id INT NOT NULL,
-    task_description TEXT NOT NULL,
-    completed BOOLEAN DEFAULT FALSE,
-    created_at DATETIME NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_user_id (user_id),
-    INDEX idx_completed (completed)
-);
+    tid             INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    uid             INT UNSIGNED NOT NULL,
+    task            VARCHAR(255) NOT NULL,
+    is_done         TINYINT(1) DEFAULT 0,
+    created_at      DATETIME DEFAULT CURRENT_TIMESTAMP,
 
--- Insert sample motivational messages (for future use)
+    FOREIGN KEY (uid) REFERENCES users(uid) ON DELETE CASCADE,
+    INDEX idx_pending (uid, is_done)
+) ENGINE=InnoDB;
+
+-- Static data for motivation widget
 CREATE TABLE motivation_messages (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    message TEXT NOT NULL,
-    category VARCHAR(50) NOT NULL
+    msg TEXT NOT NULL,
+    cat VARCHAR(32) DEFAULT 'general'
 );
 
--- Sample motivational data
-INSERT INTO motivation_messages (message, category) VALUES
-('Keep going! Every small step counts towards your big goal.', 'encouragement'),
-('You are capable of amazing things. Believe in yourself!', 'confidence'),
-('Success is the sum of small efforts repeated day in and day out.', 'persistence'),
+-- Initial seed
+INSERT INTO motivation_messages (msg, cat) VALUES 
+('Keep going! Every small step counts.', 'encouragement'),
+('You are capable of amazing things.', 'confidence'),
+('Success is the sum of small efforts.', 'persistence'),
 ('The expert in anything was once a beginner.', 'growth'),
-('Your hard work will pay off. Stay focused!', 'motivation'),
-('Progress, not perfection. You are doing great!', 'encouragement'),
-('Dream big, work hard, stay focused!', 'motivation'),
-('Every accomplishment starts with the decision to try.', 'inspiration'),
+('Stay focused!', 'motivation'),
+('Progress, not perfection.', 'encouragement'),
+('Dream big, work hard.', 'motivation'),
 ('You are stronger than you think!', 'confidence'),
-('Consistency is the key to success. Keep it up!', 'persistence');
+('Consistency is key.', 'persistence');
