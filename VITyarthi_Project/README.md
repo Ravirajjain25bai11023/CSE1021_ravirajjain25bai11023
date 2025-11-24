@@ -33,7 +33,7 @@ I kept the stack modular and lightweight to make it easy to deploy and modify.
 ## Project Structure
 
 ```text
-project/
+VITyarthi_Project/
 ├── app.py                      # Main Flask application
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
@@ -83,7 +83,7 @@ Download the project files and navigate into the folder:
 
 ```bash
 git clone <your-repo-url>
-cd project
+cd VITyarthi_Project
 ```
 
 ### 3\. Install Dependencies
