@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tracker | Subjects</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* quick overrides */
+        .sub-card { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .input-sm { width: 100%; padding: 8px; margin-bottom: 8px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .stats-row { font-size: 0.9rem; color: #666; margin-bottom: 15px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Tracker</h2>
+                <p>Hi, {{session.username}}!</p>
+            </div>
+            <ul class='sidebar-menu'>
+                <li><a href="{{url_for('dashboard')}}">📊 Dashboard</a></li>
+                <li><a href="{{url_for('goals')}}">🎯 Goals</a></li>
+                <li><a href="{{url_for('subjects')}}" class="active">📖 Subjects</a></li>
+                <li><a href="{{url_for('reports')}}">📈 Reports</a></li>
+                <li><a href="{{url_for('badges')}}">🏆 Badges</a></li>
+                <li><a href="{{url_for('study_timer')}}">⏱️ Timer</a></li>
+                <li><a href="{{url_for('todo')}}">✅ To-Do</a></li>
+                <li><a href="{{url_for('profile')}}">👤 Profile</a></li>
+                <li><a href="{{url_for('logout')}}">🚪 Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-header">
+                <h1>📖 My Subjects</h1>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for cat, msg in messages %}
+                    <div class="alert alert-{{cat}}">{{ msg }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="content-card">
+                <h2>➕ Add Subject</h2>
+                <form method="POST" action="{{url_for('add_subject')}}" style="display: flex; gap: 10px; align-items: flex-end;">
+                    <div style="flex-grow: 1;">
+                        <label style="font-weight: bold; font-size: 14px;">Subject Name</label>
+                        <input type="text" name="subject_name" class="form-control" placeholder="Physics, Math, etc." required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add</button>
+                </form>
+            </div>
+
+            {% if subjects %}
+            <div class="stats-grid">
+                {% for s in subjects %}
+                <div class="sub-card">
+                    <h3 style="color: #2980b9; margin-top: 0;">{{s.subject_name}}</h3>
+                    
+                    <div class="stats-row">
+                        <b>Logs:</b> {{s.total_logs or 0}} <br>
+                        <b>Avg:</b> {{ s.avg_marks|round(2) if s.avg_marks else 0 }} <br>
+                        <b>Total:</b> {{s.total_marks or 0}}
+                    </div>
+
+                    <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 15px;">
+
+                    <form method="POST" action="{{ url_for('log_progress', subject_id=s.id) }}">
+                        <input type="number" name="marks_scored" class="input-sm" placeholder="Marks scored" required>
+                        <input type="text" name="notes" class="input-sm" placeholder="Notes (optional)">
+                        <button type="submit" class="btn btn-secondary btn-sm" style="width: 100%;">Log Progress</button>
+                    </form>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div style="text-align: center; padding: 40px; color: #95a5a6;">
+                <p>No subjects yet. Add one above!</p>
+            </div>
+            {% endif %}
+        </main>
+    </div>
+</body>
+</html>
