@@ -1,0 +1,287 @@
+:root {
+    --main-blue: #4a90e2;
+    --success: #50c878;
+    --text: #2c3e50;
+}
+
+/* basic reset */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    /* RESTORED: The original purple/blue gradient */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #333;
+    min-height: 100vh;
+    background-attachment: fixed; /* keeps gradient nice when scrolling */
+}
+
+* { box-sizing: border-box; }
+
+a { text-decoration: none; color: inherit; }
+
+/* Helper for flex centering (Auth pages) */
+.auth-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* ensure full height */
+    padding: 15px;
+}
+
+/* Supporting multiple class names from legacy html */
+.box, .auth-card, .wrap {
+    background: #fff;
+    width: 400px;
+    padding: 35px;
+    border-radius: 15px; /* slightly rounder to match modern look */
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); /* stronger shadow for pop */
+    margin: 0 auto;
+}
+
+h1, h2 {
+    text-align: center;
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+/* inputs */
+input[type="text"], input[type="password"], input[type="email"], .form-control {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    display: block;
+    background: #f9f9f9;
+}
+
+input:focus {
+    border-color: #4a90e2;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+/* Buttons */
+.btn, button, .btn-submit {
+    cursor: pointer;
+    padding: 12px 20px;
+    border-radius: 8px;
+    border: 0;
+    font-size: 14px;
+    font-weight: bold;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.btn-primary, .btn-submit {
+    background-color: #4a90e2;
+    color: white;
+    width: 100%;
+}
+
+.btn-primary:hover { background-color: #357abd; transform: translateY(-2px); }
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-danger {
+    background: #e74c3c;
+    color: #fff;
+}
+
+/* Sidebar stuff */
+.dashboard-wrapper {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background: #f4f7f6; /* Reset bg for dashboard area so it's not purple */
+}
+
+div.sidebar {
+    width: 250px;
+    background: #fff; /* White sidebar looks cleaner */
+    color: #2c3e50;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+    z-index: 10;
+}
+
+.sidebar-header {
+    padding: 25px 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebar-menu {
+    padding: 20px 0;
+    margin: 0;
+    overflow-y: auto;
+}
+
+.sidebar-menu li a {
+    display: block;
+    padding: 12px 25px;
+    color: #666;
+    font-weight: 500;
+    border-left: 4px solid transparent;
+}
+
+.sidebar-menu li a:hover, .sidebar-menu li a.active {
+    color: #4a90e2;
+    background: #f8f9fa;
+    border-left-color: #4a90e2;
+}
+
+/* Main content area */
+.main-content {
+    flex: 1;
+    background: #f4f7f6;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.top-header {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.top-header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    text-align: left;
+}
+
+/* Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.stat-card, .content-card {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+}
+
+.stat-value {
+    font-size: 32px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-top: 10px;
+}
+
+.stat-card h3 {
+    text-align: left;
+    font-size: 13px;
+    color: #95a5a6;
+    text-transform: uppercase;
+    margin-bottom: 0;
+    letter-spacing: 1px;
+}
+
+/* Badge specific tweaks */
+.badge-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.badge-card {
+    width: 180px;
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    transition: transform 0.2s;
+}
+
+.badge-card:hover { transform: translateY(-5px); }
+
+.badge-card.earned {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.locked {
+    opacity: 0.6;
+    filter: grayscale(100%);
+}
+
+/* Alerts */
+.alert {
+    padding: 12px 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+.alert-success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.alert-error { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th {
+    text-align: left;
+    background: #f8f9fa;
+    padding: 15px;
+    font-size: 13px;
+    color: #555;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+/* Utils */
+.flex { display: flex; align-items: center; }
+.gap-10 { gap: 10px; }
+.text-center { text-align: center !important; }
+
+/* fix for mobile nav */
+@media (max-width: 768px) {
+    .dashboard-wrapper { flex-direction: column; height: auto; overflow: visible; }
+    .sidebar { width: 100%; height: auto; position: relative; }
+    .main-content { padding: 15px; overflow: visible; }
+    
+    .sidebar-menu { display: flex; overflow-x: auto; padding: 10px 0; }
+    .sidebar-menu li a { padding: 10px 15px; white-space: nowrap; border: none; border-bottom: 3px solid transparent; }
+    .sidebar-menu li a.active { background: transparent; color: #4a90e2; border-bottom-color: #4a90e2; }
+    
+    .stats-grid { grid-template-columns: 1fr; }
+    .top-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+}
+
+.streak-badge {
+    background: linear-gradient(45deg, #f093fb, #f5576c);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.links a { color: #4a90e2; font-weight: 600; }
