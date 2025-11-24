@@ -65,9 +65,8 @@ student_tracker/
 │   └── todo.html               # To-do list
 └── exports/                    # Generated export files
 
----
-
-## Steps to Install & Run the Project
+````
+##Steps to Install & Run the Project
 
 Follow these steps to get the app running on your local machine.
 
