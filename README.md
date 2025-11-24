@@ -166,9 +166,19 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
 
 *The report management interface.*
+
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165345" src="https://github.com/user-attachments/assets/c8156693-1e87-4e43-a54b-d75e3817831d" />
+
+*The badges management interface.*
+
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165357" src="https://github.com/user-attachments/assets/5a61f09f-7ade-4c77-a966-18ee044d829c" />
+
+*The timer interface.*
+
 <img width="1919" height="907" alt="Screenshot 2025-11-24 165416" src="https://github.com/user-attachments/assets/18630de7-2949-4775-922a-351209d84ab5" />
+
+*The todo management interface.*
+
 <img width="1919" height="910" alt="Screenshot 2025-11-24 165636" src="https://github.com/user-attachments/assets/149f7725-9b7f-447c-9c60-fb50bf1d70c8" />
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165701" src="https://github.com/user-attachments/assets/af94c936-6851-4a11-bc20-c39c697b25d4" />
 <img width="1919" height="910" alt="Screenshot 2025-11-24 165730" src="https://github.com/user-attachments/assets/82e64516-a422-4cb6-ad05-8a379e5c1549" />
