@@ -153,9 +153,9 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 ## Screenshots
 
 *The main dashboard showing progress.*
-<img width="1919" height="969" alt="Screenshot 2025-11-24 165100" src="https://github.com/user-attachments/assets/6faf1d5b-c448-4559-8cdf-1b8463b9b002" />
-<img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
 <img width="1918" height="912" alt="Screenshot 2025-11-24 165744" src="https://github.com/user-attachments/assets/ec5e04b7-dc0f-49c3-826e-82067636ac00" />
+<img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
+
 <img width="1919" height="910" alt="Screenshot 2025-11-24 165730" src="https://github.com/user-attachments/assets/82e64516-a422-4cb6-ad05-8a379e5c1549" />
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165701" src="https://github.com/user-attachments/assets/af94c936-6851-4a11-bc20-c39c697b25d4" />
 <img width="1919" height="910" alt="Screenshot 2025-11-24 165636" src="https://github.com/user-attachments/assets/149f7725-9b7f-447c-9c60-fb50bf1d70c8" />
