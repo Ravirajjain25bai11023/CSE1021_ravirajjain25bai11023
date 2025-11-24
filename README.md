@@ -155,9 +155,11 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 *The main dashboard showing progress.*
 <img width="1918" height="912" alt="Screenshot 2025-11-24 165744" src="https://github.com/user-attachments/assets/ec5e04b7-dc0f-49c3-826e-82067636ac00" />
 <img width="1919" height="914" alt="Screenshot 2025-11-24 165820" src="https://github.com/user-attachments/assets/de37da20-9097-4cc5-b5ce-a568108c308e" />
+
 *The goal management interface.*
 <img width="1914" height="969" alt="Screenshot 2025-11-24 165220" src="https://github.com/user-attachments/assets/bdcd0d7b-78ff-43fb-8640-f96e81af4013" />
 <img width="1919" height="909" alt="Screenshot 2025-11-24 165243" src="https://github.com/user-attachments/assets/f1dffe56-0bca-4ffe-8931-088bb1b6c0ec" />
+
 *The goal management interface.*
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165331" src="https://github.com/user-attachments/assets/a3e39b90-2d3d-4233-94be-7facb8955e3e" />
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165345" src="https://github.com/user-attachments/assets/c8156693-1e87-4e43-a54b-d75e3817831d" />
