@@ -33,7 +33,7 @@ I kept the stack modular and lightweight to make it easy to deploy and modify.
 ## Project Structure
 
 ```text
-student_tracker/
+project/
 ├── app.py                      # Main Flask application
 ├── requirements.txt            # Python dependencies
 ├── README.md                   # This file
