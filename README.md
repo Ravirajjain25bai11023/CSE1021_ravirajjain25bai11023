@@ -160,11 +160,11 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 
 *The registration interface.*
 
-<img width="1918" height="967" alt="Screenshot 2025-11-24 165046" src="https://github.com/user-attachments/assets/fe0ce8f9-82b2-4a8f-be0e-7500104cbc4a" />
+<img width="1919" height="969" alt="Screenshot 2025-11-24 165025" src="https://github.com/user-attachments/assets/067588f3-a155-42c9-b47c-aeb70aab621f" />
 
 *The login interface.*
 
-<img width="1919" height="969" alt="Screenshot 2025-11-24 165025" src="https://github.com/user-attachments/assets/067588f3-a155-42c9-b47c-aeb70aab621f" />
+<img width="1918" height="967" alt="Screenshot 2025-11-24 165046" src="https://github.com/user-attachments/assets/fe0ce8f9-82b2-4a8f-be0e-7500104cbc4a" />
 
 *The goal management interface.*
 
