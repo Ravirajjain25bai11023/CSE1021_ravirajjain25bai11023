@@ -83,7 +83,7 @@ Download the project files and navigate into the folder:
 
 ```bash
 git clone <your-repo-url>
-cd student_tracker
+cd project
 ```
 
 ### 3\. Install Dependencies
