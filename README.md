@@ -152,7 +152,10 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 
 ## Screenshots
 
-*The main dashboard showing progress charts and upcoming deadlines.*
+*The main dashboard showing progress.*
+<img width="1919" height="969" alt="Screenshot 2025-11-24 165100" src="https://github.com/user-attachments/assets/6faf1d5b-c448-4559-8cdf-1b8463b9b002" />
+
+
 
 *The goal management interface.*
 
