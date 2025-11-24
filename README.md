@@ -189,13 +189,5 @@ Once the app is running, follow this quick "sanity check" to ensure all modules 
 <img width="1919" height="911" alt="Screenshot 2025-11-24 165701" src="https://github.com/user-attachments/assets/af94c936-6851-4a11-bc20-c39c697b25d4" />
 
 <img width="1919" height="910" alt="Screenshot 2025-11-24 165730" src="https://github.com/user-attachments/assets/82e64516-a422-4cb6-ad05-8a379e5c1549" />
-
-
-
-
-
-
-
-
 ```
 ```
