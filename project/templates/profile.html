@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tracker | Profile</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* quick fix for export buttons */
+        .export-box { display: flex; gap: 10px; flex-wrap: wrap; }
+        .export-box .btn { margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Tracker</h2>
+                <p>Hi, {{session.username}}!</p>
+            </div>
+            <ul class='sidebar-menu'>
+                <li><a href="{{url_for('dashboard')}}">📊 Dashboard</a></li>
+                <li><a href="{{url_for('goals')}}">🎯 Goals</a></li>
+                <li><a href="{{url_for('subjects')}}">📖 Subjects</a></li>
+                <li><a href="{{url_for('reports')}}">📈 Reports</a></li>
+                <li><a href="{{url_for('badges')}}">🏆 Badges</a></li>
+                <li><a href="{{url_for('study_timer')}}">⏱️ Timer</a></li>
+                <li><a href="{{url_for('todo')}}">✅ To-Do</a></li>
+                <li><a href="{{url_for('profile')}}" class="active">👤 Profile</a></li>
+                <li><a href="{{url_for('logout')}}">🚪 Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-header">
+                <h1>👤 My Profile</h1>
+            </div>
+
+            <div class="stats-grid">
+                <div class="content-card">
+                    <h2>📋 User Info</h2>
+                    <div style='padding: 15px;'>
+                        <p><strong>User:</strong> {{user.username}}</p>
+                        <p><strong>Email:</strong> {{user.email}}</p>
+                        <p><strong>Joined:</strong> {{ user.created_at.strftime('%Y-%m-%d') }}</p>
+                        <p><strong>Streak:</strong> {{user.study_streak}} days 🔥</p>
+                    </div>
+                </div>
+
+                <div class="content-card">
+                    <h2>📊 Stats Overview</h2>
+                    <div style='padding: 15px;'>
+                        <p><strong>Total Goals:</strong> {{stats.total_goals}}</p>
+                        <p><strong>Done:</strong> {{stats.completed_goals}}</p>
+                        <p><strong>Active:</strong> {{stats.in_progress_goals}}</p>
+                        <p><strong>Avg Progress:</strong> {{stats.average_progress}}%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-card">
+                <h2>📥 Export Data</h2>
+                <p style="color: #666; margin-bottom: 15px;">Download your data in CSV format.</p>
+                
+                <div class="export-box">
+                    <a href="{{url_for('export_goals')}}" class="btn btn-primary">Goals CSV</a>
+                    <a href="{{url_for('export_progress')}}" class="btn btn-secondary">Progress CSV</a>
+                    <a href="{{url_for('export_reports')}}" class="btn btn-primary">Reports CSV</a>
+                    <a href="{{url_for('export_all')}}" class="btn btn-secondary">Download All (Zip)</a>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

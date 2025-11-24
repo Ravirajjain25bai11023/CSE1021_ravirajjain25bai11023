@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Tracker | Goals</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* quick fix for table spacing */
+        td form { display: inline-flex; gap: 5px; align-items: center; }
+    </style>
+</head>
+<body>
+    <div class="dashboard-wrapper">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>📚 Tracker</h2>
+                <p>Hi, {{session.username}}!</p>
+            </div>
+            <ul class='sidebar-menu'>
+                <li><a href="{{url_for('dashboard')}}">📊 Dashboard</a></li>
+                <li><a href="{{url_for('goals')}}" class="active">🎯 My Goals</a></li>
+                <li><a href="{{url_for('subjects')}}">📖 Subjects</a></li>
+                <li><a href="{{url_for('reports')}}">📈 Reports</a></li>
+                <li><a href="{{url_for('badges')}}">🏆 Badges</a></li>
+                <li><a href="{{url_for('study_timer')}}">⏱️ Timer</a></li>
+                <li><a href="{{url_for('todo')}}">✅ To-Do</a></li>
+                <li><a href="{{url_for('profile')}}">👤 Profile</a></li>
+                <li><a href="{{url_for('logout')}}">🚪 Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <div class="top-header">
+                <h1>🎯 My Goals</h1>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for cat, msg in messages %}
+                    <div class="alert alert-{{cat}}">{{ msg }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="content-card">
+                <h2>➕ Create New Goal</h2>
+                <form method="POST" action="{{url_for('add_goal')}}">
+                    <div class="stats-grid">
+                        <div class="form-group">
+                            <label>Subject</label>
+                            <input type="text" class="form-control" name="subject" placeholder="e.g., Mathematics" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Score</label>
+                            <input type="number" class="form-control" name="target_score" placeholder="95" min="0" max="100" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Deadline</label>
+                            <input type="date" class="form-control" name="deadline" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Description (Optional)</label>
+                        <input type="text" class="form-control" name="description" placeholder="Notes...">
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Create Goal</button>
+                </form>
+            </div>
+
+            <div class="content-card">
+                <h2>📋 Your Goals</h2>
+                
+                {% if goals %}
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Subject</th> <th>Target</th> <th>Progress</th> <th>Status</th> <th>Deadline</th> <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for g in goals %}
+                            <tr>
+                                <td><strong>{{g.subject}}</strong></td>
+                                <td>{{g.target_score}}</td>
+                                <td>
+                                    <div class="progress-container">
+                                        <div class="progress-bar" style="width: {{g.current_progress}}%"></div>
+                                    </div>
+                                    <small>{{g.current_progress}}%</small>
+                                </td>
+                                <td>
+                                    <span class="badge badge-{{ g.status.lower().replace(' ', '-') }}">
+                                        {{g.status}}
+                                    </span>
+                                </td>
+                                <td>{{ g.deadline.strftime('%Y-%m-%d') }}</td>
+                                <td>
+                                    <form method="POST" action="{{ url_for('update_goal', goal_id=g.id) }}">
+                                        <input type="number" name="progress" min="0" max="100" value="{{g.current_progress}}" style="width: 60px; padding: 4px;" required>
+                                        <button type="submit" class="btn btn-secondary btn-sm">Update</button>
+                                    </form>
+                                    
+                                    <a href="{{ url_for('delete_goal', goal_id=g.id) }}" 
+                                       class="btn btn-danger btn-sm" 
+                                       style="margin-left: 5px;"
+                                       onclick="return confirm('Delete goal?')">Delete</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div style='text-align: center; color: #95a5a6; padding: 40px;'>
+                    <p>No goals yet. Create your first goal above! 🚀</p>
+                </div>
+                {% endif %}
+            </div>
+        </main>
+    </div>
+</body>
+</html>
