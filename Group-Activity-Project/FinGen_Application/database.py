@@ -5,7 +5,7 @@ from flask import g
 DATABASE_CONFIG = {
     'host': 'localhost',
     'user': 'root',
-    'password': '@RaviraajJain5',  
+    'password': '',  #REPLACE
     'database': 'fingen_app'
 }
 
@@ -101,3 +101,4 @@ def init_app(app):
         
         db.commit()
         cursor.close()
+
