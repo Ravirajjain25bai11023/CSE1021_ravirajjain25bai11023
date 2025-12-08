@@ -1,0 +1,51 @@
+<!-- ==================== templates/dashboard.html ==================== -->
+{% extends "base.html" %}
+{% block title %}Dashboard - Fingen App{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Welcome, {{ user_name }}!</h2>
+
+<div class="row">
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-info">
+            <div class="card-body">
+                <h5 class="card-title">Total Transactions</h5>
+                <h2>{{ transaction_summary.total }}</h2>
+                <p>Total Amount: ₹{{ "%.2f"|format(transaction_summary.total_amount) }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-warning">
+            <div class="card-body">
+                <h5 class="card-title">Daily Spending Limit</h5>
+                <h2>₹{{ "%.2f"|format(limit_data.daily_limit if limit_data else 0) }}</h2>
+                <p>Today's Spending: ₹{{ "%.2f"|format(today_spending) }}</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-3">
+        <div class="card text-white bg-success">
+            <div class="card-body">
+                <h5 class="card-title">Borrowed Amount</h5>
+                <h2>₹{{ "%.2f"|format(limit_data.borrowed_amount if limit_data else 0) }}</h2>
+                <p>From future limits</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <h4>Quick Actions</h4>
+        <div class="btn-group" role="group">
+            <a href="{{ url_for('transaction.add') }}" class="btn btn-primary">Add Transaction</a>
+            <a href="{{ url_for('limit.view') }}" class="btn btn-warning">Manage Limit</a>
+            <a href="{{ url_for('report.view') }}" class="btn btn-info">View Reports</a>
+            <a href="{{ url_for('payment.list_payments') }}" class="btn btn-success">Manage Payments</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

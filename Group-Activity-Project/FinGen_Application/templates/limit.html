@@ -1,0 +1,59 @@
+<!-- ==================== templates/limit.html ==================== -->
+{% extends "base.html" %}
+{% block title %}Spending Limit - Fingen App{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Manage Spending Limit</h2>
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Current Status</h5>
+                <p><strong>Daily Limit:</strong> ₹{{ "%.2f"|format(limit_data.daily_limit if limit_data else 0) }}</p>
+                <p><strong>Today's Spending:</strong> ₹{{ "%.2f"|format(today_spending) }}</p>
+                <p><strong>Remaining:</strong> 
+                    ₹{{ "%.2f"|format((limit_data.daily_limit if limit_data else 0) - today_spending) }}</p>
+                <p><strong>Borrowed Amount:</strong> ₹{{ "%.2f"|format(limit_data.borrowed_amount if limit_data else 0) }}</p>
+                
+                {% if today_spending > (limit_data.daily_limit if limit_data else 0) %}
+                <div class="alert alert-danger">
+                    You've exceeded your daily limit by ₹{{ "%.2f"|format(today_spending - limit_data.daily_limit) }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Update Daily Limit</h5>
+                <form method="POST" action="{{ url_for('limit.update') }}">
+                    <div class="mb-3">
+                        <label for="daily_limit" class="form-label">New Daily Limit (₹)</label>
+                        <input type="number" step="0.01" class="form-control" id="daily_limit" 
+                               name="daily_limit" value="{{ limit_data.daily_limit if limit_data else 0 }}" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Limit</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Borrow from Future Limit</h5>
+                <p class="text-muted">Need extra spending today? Borrow from future days' limits.</p>
+                <form method="POST" action="{{ url_for('limit.borrow') }}">
+                    <div class="mb-3">
+                        <label for="borrow_amount" class="form-label">Amount to Borrow (₹)</label>
+                        <input type="number" step="0.01" class="form-control" id="borrow_amount" 
+                               name="borrow_amount" required>
+                    </div>
+                    <button type="submit" class="btn btn-warning">Borrow Amount</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<!-- ==================== templates/edit_transaction.html ==================== -->
+{% extends "base.html" %}
+{% block title %}Edit Transaction - Fingen App{% endblock %}
+
+{% block content %}
+<h2 class="mb-4">Edit Transaction</h2>
+
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Transaction Type</label>
+                        <select class="form-select" id="type" name="type" required>
+                            <option value="expense" {% if transaction.amount < 0 %}selected{% endif %}>Expense</option>
+                            <option value="income" {% if transaction.amount > 0 %}selected{% endif %}>Income</option>
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="category_id" class="form-label">Category</label>
+                        <select class="form-select" id="category_id" name="category_id" required>
+                            {% for category in categories %}
+                            <option value="{{ category.id }}" {% if category.id == transaction.category_id %}selected{% endif %}>
+                                {{ category.name }} ({{ category.type }})
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="date" class="form-label">Date</label>
+                        <input type="date" class="form-control" id="date" name="date" value="{{ transaction.date }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="amount" class="form-label">Amount</label>
+                        <input type="number" step="0.01" class="form-control" id="amount" name="amount" 
+                               value="{{ '%.2f'|format(transaction.amount|abs) }}" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea class="form-control" id="description" name="description" rows="3">{{ transaction.description }}</textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">Update Transaction</button>
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Cancel</a>
+                    <a href="{{ url_for('transaction.delete', id=transaction.id) }}" class="btn btn-danger" 
+                       onclick="return confirm('Are you sure you want to delete this transaction?')">Delete</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
